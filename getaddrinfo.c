@@ -39,16 +39,16 @@ int
 main(void)
 {
 	entry *tt;
-	int status, r;
+	int status, rv;
 	struct addrinfo *p, *q;
 	in_port_t port;
 	char buf[sizeof(struct in6_addr)];
 	const char *msg;
 
 	for(tt = tests; tt->addr; tt++){
-		r = getaddrinfo(tt->name, tt->service, NULL, &p);
-		if(r != 0){
-			msg = gai_strerror(r);
+		rv = getaddrinfo(tt->name, tt->service, NULL, &p);
+		if(rv != 0){
+			msg = gai_strerror(rv);
 			fprintf(stderr, "getaddrinfo(%s): %s\n", tt->addr, msg);
 			status++;
 			continue;
