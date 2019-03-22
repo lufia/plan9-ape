@@ -1,0 +1,13 @@
+ok
+- basename
+- fchdir
+- gai_strerror
+- inet
+- sysconf
+- size
+- strerror
+
+fail
+- arc4random
+- getaddrinfo
+- getnameinfo

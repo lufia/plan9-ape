@@ -1,3 +1,4 @@
+#define _BSD_EXTENSION
 #include <stdio.h>
 #include <string.h>
 #include <netdb.h>

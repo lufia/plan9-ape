@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define __BSD_EXTENSION
+#define _BSD_EXTENSION
 #include <stdlib.h>
 #include <string.h>
 
