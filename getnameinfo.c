@@ -14,6 +14,7 @@ struct entry {
 } tests[] = {
 	{ AF_INET, "127.0.0.1", 80, "localhost!http" },
 	{ AF_INET6, "::1", 80, "localhost!http" },
+	{ 0, NULL, 0, NULL },
 };
 
 static char *
@@ -71,7 +72,7 @@ main(void)
 	int status, cmp;
 	char *addr;
 
-	for(tt = tests; tt->addr; tt++){
+	for(tt = tests; tt->af; tt++){
 		addr = getaddr(tt->af, tt->addr, tt->port);
 		if(addr == NULL){
 			fprintf(stderr, "lookup %s!%d failed\n", tt->addr, tt->port);

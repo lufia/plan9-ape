@@ -11,6 +11,7 @@ struct entry {
 	unsigned short port;
 } tests[] = {
 	{ "localhost", "http", "127.1", 80 },
+	{ NULL, NULL, NULL, 0 },
 };
 
 static in_port_t
@@ -45,7 +46,7 @@ main(void)
 	char buf[sizeof(struct in6_addr)];
 	const char *msg;
 
-	for(tt = tests; tt->addr; tt++){
+	for(tt = tests; tt->name; tt++){
 		rv = getaddrinfo(tt->name, tt->service, NULL, &p);
 		if(rv != 0){
 			msg = gai_strerror(rv);
