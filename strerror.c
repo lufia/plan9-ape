@@ -12,6 +12,7 @@ struct entry {
 	{ EALREADY, "Operation already in progress" },
  	{ ECONNRESET, "Connection reset by peer" },
 	{ EOVERFLOW, "Value too large for defined data type" },
+	{ ELOOP, "Too many symbolick links encountered" },
 	{ 0, NULL },
 };
 
