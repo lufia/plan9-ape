@@ -1,3 +1,5 @@
+#define _POSIX_SOURCE
+#define _PLAN9_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>

@@ -1,3 +1,5 @@
+#define _POSIX_SOURCE
+#define _PLAN9_SOURCE
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -15,7 +17,7 @@ fatal(int e, char *fmt, ...)
 	va_start(arg, fmt);
 	vfprintf(stderr, fmt, arg);
 	if(fmt[strlen(fmt)-1] == ':')
-		fprintf(stderr, ": %s\n", strerror(e));
+		fprintf(stderr, " %s\n", strerror(e));
 	va_end(arg);
 	exit(1);
 }
@@ -30,13 +32,12 @@ fn(void *arg)
 	pid = pthread_self();
 	s = pthread_getspecific(key);
 	if(s)
-		fatal(0, "pid=%p: already exist '%s'\n", &pid, s);
+		fatal(0, "pid=%u: already exist '%s'\n", pid, s);
 	e = pthread_setspecific(key, arg);
 	if(e != 0)
-		fatal(e, "pid=%p: setspecific:", &pid);
-	sleep(1);
+		fatal(e, "pid=%u: setspecific:", pid);
 	s = pthread_getspecific(key);
-	printf("pid=%p: %s\n", &pid, s);
+	printf("pid=%u: %s\n", pid, s);
 	pthread_exit(NULL);
 
 	/* can't reach here */

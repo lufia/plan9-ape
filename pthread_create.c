@@ -1,3 +1,5 @@
+#define _POSIX_SOURCE
+#define _PLAN9_SOURCE
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -13,7 +15,7 @@ fatal(int e, char *fmt, ...)
 	va_start(arg, fmt);
 	vfprintf(stderr, fmt, arg);
 	if(fmt[strlen(fmt)-1] == ':')
-		fprintf(stderr, ": %s\n", strerror(e));
+		fprintf(stderr, " %s\n", strerror(e));
 	va_end(arg);
 	exit(1);
 }
@@ -26,7 +28,7 @@ fn(void *arg)
 	pid = (pthread_t *)arg;
 	self = pthread_self();
 	if(!pthread_equal(*pid, self))
-		fprintf(stderr, "pthread_self() differ");
+		fprintf(stderr, "pthread_self() = %u; want %u\n", self, *pid);
 	return NULL;
 }
 
@@ -36,9 +38,10 @@ int
 main(void)
 {
 	int e, i;
-	pthread_t pids[3];
+	static pthread_t pids[3];
 
 	for(i = 0; i < nelem(pids); i++){
+		pids[i] = 0;
 		e = pthread_create(&pids[i], NULL, fn, &pids[i]);
 		if(e != 0)
 			fatal(e, "create:");
